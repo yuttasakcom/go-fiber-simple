@@ -1,10 +1,9 @@
 package routes
 
-import (
-	"github.com/gofiber/fiber/v2"
-	"github.com/yuttasakcom/go-fiber-simple/controllers"
-)
+import "github.com/gofiber/fiber/v2"
 
-func Setup(app *fiber.App){
-	app.Post("/api/register", controllers.Register)
+func Setup(a *fiber.App) {
+	v1(a)
+	SwaggerRoute(a)
 }
+
