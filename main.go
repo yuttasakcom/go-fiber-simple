@@ -1,27 +1,18 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/gofiber/fiber/v2"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+	"github.com/yuttasakcom/go-fiber-simple/database"
+	"github.com/yuttasakcom/go-fiber-simple/routes"
 )
 
 func main() {
-	dsn := "host=localhost user=postgres password=password dbname=gosimple port=5432 sslmode=disable TimeZone=Asia/Shanghai"
 	
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	if err != nil {
-		panic("failed to connect database")
-	}
+	database.Connect()
 
-	fmt.Println(db)
 	app := fiber.New()
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World 👋!")
-	})
+	routes.Setup(app)
 
 	app.Listen(":3000")
 }
